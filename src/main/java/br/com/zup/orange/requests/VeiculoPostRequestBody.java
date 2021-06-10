@@ -2,8 +2,7 @@ package br.com.zup.orange.requests;
 
 import br.com.zup.orange.domain.Veiculo;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 public class VeiculoPostRequestBody {
     @NotBlank(message = "Marca é obrigatória")
@@ -13,6 +12,9 @@ public class VeiculoPostRequestBody {
     private String modelo;
 
     @NotNull(message = "Ano é obrigatório")
+    @Positive(message = "Ano deve ser positivo")
+    @Min(value = 1884, message = "Ano não pode ser anterior a 1884")
+    @Max(value = 2021, message = "Ano não pode ser posterior a 2021")
     private int ano;
 
     public VeiculoPostRequestBody(String marca, String modelo, int ano) {
