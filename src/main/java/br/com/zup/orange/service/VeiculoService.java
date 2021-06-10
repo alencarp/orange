@@ -2,6 +2,7 @@ package br.com.zup.orange.service;
 
 import br.com.zup.orange.domain.Veiculo;
 import br.com.zup.orange.repository.VeiculoRepository;
+import br.com.zup.orange.requests.VeiculoPostRequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class VeiculoService {
         return veiculoRepository.findAll();
     }
 
-    public void save(Veiculo veiculo) {
-        veiculoRepository.save(veiculo);
+    public Veiculo save(VeiculoPostRequestBody veiculoPostRequestBody) {
+        return veiculoRepository.save(veiculoPostRequestBody.build());
     }
 }

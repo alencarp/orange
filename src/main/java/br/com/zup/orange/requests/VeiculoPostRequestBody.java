@@ -1,19 +1,11 @@
-package br.com.zup.orange.domain;
+package br.com.zup.orange.requests;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import br.com.zup.orange.domain.Veiculo;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Entity
-public class Veiculo {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class VeiculoPostRequestBody {
     @NotBlank(message = "Marca é obrigatória")
     private String marca;
 
@@ -23,24 +15,21 @@ public class Veiculo {
     @NotNull(message = "Ano é obrigatório")
     private int ano;
 
-    public Veiculo() {
-    }
-
-    public Veiculo(Long id, String marca, String modelo, int ano) {
-        this.id = id;
+    public VeiculoPostRequestBody(String marca, String modelo, int ano) {
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
     }
 
-
-
-    public Long getId() {
-        return id;
+    public VeiculoPostRequestBody() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Veiculo build() {
+        Veiculo veiculo = new Veiculo();
+        veiculo.setMarca(this.marca);
+        veiculo.setModelo(this.modelo);
+        veiculo.setAno(this.ano);
+        return veiculo;
     }
 
     public String getMarca() {
@@ -66,5 +55,4 @@ public class Veiculo {
     public void setAno(int ano) {
         this.ano = ano;
     }
-
 }
