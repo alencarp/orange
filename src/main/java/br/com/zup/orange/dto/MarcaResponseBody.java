@@ -1,12 +1,7 @@
-package br.com.zup.orange.domain;
+package br.com.zup.orange.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+public class MarcaResponseBody {
 
-@Entity
-public class Marca {
-
-    @Id
     private int codigo;
     private String nome;
 

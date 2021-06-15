@@ -1,11 +1,6 @@
 package br.com.zup.orange.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
 @Entity
 public class Veiculo {
@@ -14,23 +9,25 @@ public class Veiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Marca é obrigatória")
+    @ManyToOne //Muitos Veiculos para Um User
+    private User user;
+
     private String marca;
-
-    @NotBlank(message = "Modelo é obrigatório")
     private String modelo;
-
-    @NotNull(message = "Ano é obrigatório")
     private int ano;
+    private double valor;
+
 
     public Veiculo() {
     }
 
-    public Veiculo(Long id, String marca, String modelo, int ano) {
+    public Veiculo(Long id, User user, String marca, String modelo, int ano, double valor) {
         this.id = id;
+        this.user = user;
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
+        this.valor = valor;
     }
 
 
@@ -42,6 +39,10 @@ public class Veiculo {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public User getUser() {        return user;    }
+
+    public void setUser(User user) {        this.user = user;    }
 
     public String getMarca() {
         return marca;
@@ -67,4 +68,11 @@ public class Veiculo {
         this.ano = ano;
     }
 
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
 }

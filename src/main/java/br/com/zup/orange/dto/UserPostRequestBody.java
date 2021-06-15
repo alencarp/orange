@@ -1,29 +1,36 @@
-package br.com.zup.orange.domain;
+package br.com.zup.orange.dto;
 
-import javax.persistence.*;
+import br.com.zup.orange.domain.User;
+import br.com.zup.orange.domain.Veiculo;
+
+import javax.persistence.Column;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
-@Entity
-public class User {
+public class UserPostRequestBody {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @OneToMany
     private List<Veiculo> veiculos;
 
+    @NotBlank(message = "Name is mandatory")
     private String name;
+
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "Is mandatory to be an e-mail")
+    @Column(unique = true)
     private String email;
+
+    @Column(unique = true)
     private String cpf;
 
+    @Column(table = "datanasc")
     private String dataNascimento;
 
-    public User() {
+
+    public UserPostRequestBody() {
     }
 
-    public User(long id, List<Veiculo> veiculos, String name, String email, String cpf, String dataNascimento) {
-        this.id = id;
+    public UserPostRequestBody(List<Veiculo> veiculos, String name, String email, String cpf, String dataNascimento) {
         this.veiculos = veiculos;
         this.name = name;
         this.email = email;
@@ -31,12 +38,14 @@ public class User {
         this.dataNascimento = dataNascimento;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public User build() {
+        User user = new User();
+        user.setName(this.name);
+        user.setEmail(this.email);
+        user.setCpf(this.cpf);
+        user.setDataNascimento(this.dataNascimento);
+        user.setVeiculos(this.veiculos);
+        return user;
     }
 
     public List<Veiculo> getVeiculos() {
@@ -81,9 +90,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", veiculos=" + veiculos +
+        return "UserPostRequestBody{" +
+                "veiculos=" + veiculos +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", cpf='" + cpf + '\'' +

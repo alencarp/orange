@@ -1,7 +1,7 @@
 package br.com.zup.orange.controller;
 
 import br.com.zup.orange.domain.User;
-import br.com.zup.orange.requests.UserPostRequestBody;
+import br.com.zup.orange.dto.UserPostRequestBody;
 import br.com.zup.orange.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -2,7 +2,7 @@ package br.com.zup.orange.service;
 
 import br.com.zup.orange.domain.User;
 import br.com.zup.orange.repository.UserRepository;
-import br.com.zup.orange.requests.UserPostRequestBody;
+import br.com.zup.orange.dto.UserPostRequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
