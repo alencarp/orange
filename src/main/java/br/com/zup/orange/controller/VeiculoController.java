@@ -2,8 +2,9 @@ package br.com.zup.orange.controller;
 
 import br.com.zup.orange.domain.Veiculo;
 import br.com.zup.orange.dto.VeiculoPostRequestBody;
+import br.com.zup.orange.exception.ModeloNotFoundException;
 import br.com.zup.orange.service.VeiculoService;
-import br.com.zup.orange.service.exception.MarcaNotFoundException;
+import br.com.zup.orange.exception.MarcaNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class VeiculoController {
     }
 
     @PostMapping
-    public ResponseEntity<Veiculo> save (@Valid @RequestBody VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException {
+    public ResponseEntity<Veiculo> save (@Valid @RequestBody VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException, ModeloNotFoundException {
         return ResponseEntity.ok(veiculoService.save(veiculoPostRequestBody));
     }
 

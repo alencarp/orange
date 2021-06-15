@@ -1,9 +1,10 @@
 package br.com.zup.orange.service;
 
 import br.com.zup.orange.domain.Veiculo;
+import br.com.zup.orange.exception.ModeloNotFoundException;
 import br.com.zup.orange.repository.VeiculoRepository;
 import br.com.zup.orange.dto.VeiculoPostRequestBody;
-import br.com.zup.orange.service.exception.MarcaNotFoundException;
+import br.com.zup.orange.exception.MarcaNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,9 @@ public class VeiculoService {
         return veiculoRepository.findAll();
     }
 
-    public Veiculo save(VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException {
+    public Veiculo save(VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException, ModeloNotFoundException {
         double precoVeiculo = new BuscaValorFipeService().buscaPrecoVeiculo(veiculoPostRequestBody);
-        return veiculoRepository.save(veiculoPostRequestBody.build(precoVeiculo));
+//        return veiculoRepository.save(veiculoPostRequestBody.build(precoVeiculo));
+        return  null;
     }
 }

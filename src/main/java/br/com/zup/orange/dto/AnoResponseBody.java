@@ -1,14 +1,15 @@
 package br.com.zup.orange.dto;
 
 public class AnoResponseBody {
-    private int codigo;
+
+    private String codigo;
     private String nome;
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

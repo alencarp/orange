@@ -7,8 +7,6 @@ import javax.validation.constraints.*;
 
 public class VeiculoPostRequestBody {
 
-    private User user;
-
     @NotBlank(message = "Marca é obrigatória")
     private String marca;
 
@@ -21,24 +19,22 @@ public class VeiculoPostRequestBody {
     @Max(value = 2021, message = "Ano não pode ser posterior a 2021")
     private int ano;
 
-    private double valor;
 
-    public VeiculoPostRequestBody(String marca, String modelo, int ano, double valor) {
+
+    public VeiculoPostRequestBody(String marca, String modelo, int ano) {
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
-        this.valor = valor;
     }
 
     public VeiculoPostRequestBody() {
     }
 
-    public Veiculo build(double valor) {
+    public Veiculo build() {
         Veiculo veiculo = new Veiculo();
         veiculo.setMarca(this.marca);
         veiculo.setModelo(this.modelo);
         veiculo.setAno(this.ano);
-        veiculo.setUser(this.user);
         return veiculo;
     }
 
@@ -64,21 +60,5 @@ public class VeiculoPostRequestBody {
 
     public void setAno(int ano) {
         this.ano = ano;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
     }
 }
