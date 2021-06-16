@@ -3,6 +3,7 @@ package br.com.zup.orange.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "veiculo")
 public class Veiculo {
 
     @Id
@@ -11,18 +12,22 @@ public class Veiculo {
     private String marca;
     private String modelo;
     private int ano;
+    private String valor;
+
+    @JoinColumn(name = "usuario_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Usuario usuario;
 
     public Veiculo() {
     }
 
-    public Veiculo(Long id, User user, String marca, String modelo) {
+    public Veiculo(Long id, String marca, String modelo, int ano, String valor) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
+        this.valor = valor;
     }
-
-
 
     public Long getId() {
         return id;
@@ -54,5 +59,19 @@ public class Veiculo {
 
     public void setAno(int ano) {
         this.ano = ano;
+    }
+
+    public void setValor(String valor) { this.valor = valor;    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void atribuiUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

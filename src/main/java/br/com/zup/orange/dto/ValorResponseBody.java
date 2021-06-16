@@ -1,6 +1,11 @@
 package br.com.zup.orange.dto;
 
-public class ValorResponseBody {
+import com.fasterxml.jackson.annotation.JsonSetter;
+
+import java.io.Serializable;
+
+public class ValorResponseBody implements Serializable {
+
     /*
     "Valor": "R$ 3.055,00",
 "Marca": "Ford",
@@ -13,100 +18,118 @@ public class ValorResponseBody {
 "SiglaCombustivel": "G"
      */
 
-    private String Valor;
-    private String Marca;
-    private String Modelo;
-    private int AnoModelo;
-    private String Combustivel;
-    private String CodigoFipe;
-    private String MesReferencia;
-    private int TipoVeiculo;
-    private String SiglaCombustivel;
+    @JsonSetter("Valor")
+    private String valor;
+
+    @JsonSetter("Marca")
+    private String marca;
+
+    @JsonSetter("Modelo")
+    private String modelo;
+
+    @JsonSetter("AnoModelo")
+    private int anoModelo;
+
+    @JsonSetter("Combustivel")
+    private String combustivel;
+
+    @JsonSetter("CodigoFipe")
+    private String codigoFipe;
+
+    @JsonSetter("MesReferencia")
+    private String mesReferencia;
+
+    @JsonSetter("TipoVeiculo")
+    private int tipoVeiculo;
+
+    @JsonSetter("SiglaCombustivel")
+    private String siglaCombustivel;
 
     public String getValor() {
-        return Valor;
+        return valor;
     }
 
+
     public void setValor(String valor) {
-        Valor = valor;
+        this.valor = valor;
     }
 
     public String getMarca() {
-        return Marca;
+        return marca;
     }
 
     public void setMarca(String marca) {
-        Marca = marca;
+        this.marca = marca;
     }
 
     public String getModelo() {
-        return Modelo;
+        return modelo;
     }
 
     public void setModelo(String modelo) {
-        Modelo = modelo;
+        this.modelo = modelo;
     }
 
     public int getAnoModelo() {
-        return AnoModelo;
+        return anoModelo;
     }
 
     public void setAnoModelo(int anoModelo) {
-        AnoModelo = anoModelo;
+        this.anoModelo = anoModelo;
     }
 
     public String getCombustivel() {
-        return Combustivel;
+        return combustivel;
     }
 
     public void setCombustivel(String combustivel) {
-        Combustivel = combustivel;
+        this.combustivel = combustivel;
     }
 
     public String getCodigoFipe() {
-        return CodigoFipe;
+        return codigoFipe;
     }
 
     public void setCodigoFipe(String codigoFipe) {
-        CodigoFipe = codigoFipe;
+        this.codigoFipe = codigoFipe;
     }
 
     public String getMesReferencia() {
-        return MesReferencia;
+        return mesReferencia;
     }
 
     public void setMesReferencia(String mesReferencia) {
-        MesReferencia = mesReferencia;
+        this.mesReferencia = mesReferencia;
     }
 
     public int getTipoVeiculo() {
-        return TipoVeiculo;
+        return tipoVeiculo;
     }
 
     public void setTipoVeiculo(int tipoVeiculo) {
-        TipoVeiculo = tipoVeiculo;
+        this.tipoVeiculo = tipoVeiculo;
     }
 
     public String getSiglaCombustivel() {
-        return SiglaCombustivel;
+        return siglaCombustivel;
     }
 
     public void setSiglaCombustivel(String siglaCombustivel) {
-        SiglaCombustivel = siglaCombustivel;
+        this.siglaCombustivel = siglaCombustivel;
     }
 
     @Override
     public String toString() {
         return "ValorResponseBody{" +
-                "Valor='" + Valor + '\'' +
-                ", Marca='" + Marca + '\'' +
-                ", Modelo='" + Modelo + '\'' +
-                ", AnoModelo=" + AnoModelo +
-                ", Combustivel='" + Combustivel + '\'' +
-                ", CodigoFipe='" + CodigoFipe + '\'' +
-                ", MesReferencia='" + MesReferencia + '\'' +
-                ", TipoVeiculo=" + TipoVeiculo +
-                ", SiglaCombustivel='" + SiglaCombustivel + '\'' +
+                "valor='" + valor + '\'' +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", anoModelo=" + anoModelo +
+                ", combustivel='" + combustivel + '\'' +
+                ", codigoFipe='" + codigoFipe + '\'' +
+                ", mesReferencia='" + mesReferencia + '\'' +
+                ", tipoVeiculo=" + tipoVeiculo +
+                ", siglaCombustivel='" + siglaCombustivel + '\'' +
                 '}';
     }
 }

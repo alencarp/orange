@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VeiculoService {
     private VeiculoRepository veiculoRepository;
-    private BuscaValorFipeService buscaValorFipeService;
 
     @Autowired
     public VeiculoService(VeiculoRepository veiculoRepository) {
@@ -25,8 +25,17 @@ public class VeiculoService {
     }
 
     public Veiculo save(VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException, ModeloNotFoundException {
-        double precoVeiculo = new BuscaValorFipeService().buscaPrecoVeiculo(veiculoPostRequestBody);
-//        return veiculoRepository.save(veiculoPostRequestBody.build(precoVeiculo));
-        return  null;
+        String precoVeiculo = new BuscaValorFipeService().buscaPrecoVeiculo(veiculoPostRequestBody);
+        return veiculoRepository.save(veiculoPostRequestBody.build(precoVeiculo));
+    }
+
+    public Veiculo save(Veiculo veiculo){
+        return veiculoRepository.save(veiculo);
+    }
+
+
+    public Optional<Veiculo> findById(Long veiculoId) {
+//        Veiculo veiculo = veiculoService.findById(veiculoId).get();
+        return veiculoRepository.findById(veiculoId);
     }
 }

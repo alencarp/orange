@@ -14,7 +14,7 @@ public class BuscaValorFipeService {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public double buscaPrecoVeiculo(VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException, ModeloNotFoundException {
+    public String buscaPrecoVeiculo(VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException, ModeloNotFoundException {
         MarcaResponseBody[] marcasArray = buscarMarca();
         String marca = veiculoPostRequestBody.getMarca();
         int codigoMarca = buscaCodigoMarcaByNome(marcasArray, marca);
@@ -31,9 +31,9 @@ public class BuscaValorFipeService {
         System.out.println("Código do ano: " + codigoAno);
 
         ValorResponseBody valorResponseBody = buscarValor(codigoMarca, codigoModelo, codigoAno);
-        valorResponseBody.toString();
-//        return buscaValor();
-        return 0.0;
+        String valorCarro = valorResponseBody.getValor();
+        System.out.println("Valor do Carro: " + valorCarro);
+        return valorCarro;
 
     }
 
@@ -77,7 +77,7 @@ public class BuscaValorFipeService {
 
 
 
-    public ModelosListaResponseBody buscarModelo(int codigoMarca) throws MarcaNotFoundException {
+    public ModelosListaResponseBody buscarModelo(int codigoMarca) throws ModeloNotFoundException {
         UriComponents uri = UriComponentsBuilder.newInstance()
                 .scheme("https")
                 .host("parallelum.com.br")
@@ -165,12 +165,12 @@ public class BuscaValorFipeService {
 
         ResponseEntity<ValorResponseBody> responseEntityValor = restTemplate.getForEntity(uri.toUriString(), ValorResponseBody.class);
         ValorResponseBody valorResponseBody = responseEntityValor.getBody();
-        imprimirValor(valorResponseBody);
+        imprimirValorResponseBody(valorResponseBody);
         return valorResponseBody;
     }
 
-    private void imprimirValor(ValorResponseBody valorResponseBody) {
-        System.out.println(valorResponseBody.getValor());
+    private void imprimirValorResponseBody(ValorResponseBody valorResponseBody) {
+        System.out.println(valorResponseBody.toString());
     }
 
 }

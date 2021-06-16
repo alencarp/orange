@@ -1,8 +1,10 @@
 package br.com.zup.orange.controller;
 
+import br.com.zup.orange.domain.Usuario;
 import br.com.zup.orange.domain.Veiculo;
 import br.com.zup.orange.dto.VeiculoPostRequestBody;
 import br.com.zup.orange.exception.ModeloNotFoundException;
+import br.com.zup.orange.service.UsuarioService;
 import br.com.zup.orange.service.VeiculoService;
 import br.com.zup.orange.exception.MarcaNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,11 @@ public class VeiculoController {
     private VeiculoService veiculoService;
 
     @Autowired
+    private UsuarioService usuarioService;
+
+
+
+    @Autowired
     public VeiculoController(VeiculoService veiculoService) {
         this.veiculoService = veiculoService;
     }
@@ -36,6 +43,19 @@ public class VeiculoController {
     public ResponseEntity<Veiculo> save (@Valid @RequestBody VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException, ModeloNotFoundException {
         return ResponseEntity.ok(veiculoService.save(veiculoPostRequestBody));
     }
+
+    @PutMapping("/{veiculoId}/usuario/{usuarioId}")
+    Veiculo atribuiUsuarioToVeiculo(
+            @PathVariable Long usuarioId,
+            @PathVariable Long veiculoId
+    ) {
+        Veiculo veiculo = veiculoService.findById(veiculoId).get();
+        Usuario usuario = usuarioService.findById(usuarioId).get();
+        veiculo.atribuiUsuario(usuario);
+        return veiculoService.save(veiculo);
+    }
+
+
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)

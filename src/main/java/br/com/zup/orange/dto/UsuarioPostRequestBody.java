@@ -1,14 +1,12 @@
 package br.com.zup.orange.dto;
 
-import br.com.zup.orange.domain.User;
-import br.com.zup.orange.domain.Veiculo;
+import br.com.zup.orange.domain.Usuario;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
-public class UserPostRequestBody {
+public class UsuarioPostRequestBody {
     @NotBlank(message = "Name is mandatory")
     private String name;
 
@@ -18,20 +16,20 @@ public class UserPostRequestBody {
     private String email;
 
 
-    public UserPostRequestBody() {
+    public UsuarioPostRequestBody() {
     }
 
-    public UserPostRequestBody(String name, String email) {
+    public UsuarioPostRequestBody(String name, String email) {
 
         this.name = name;
         this.email = email;
     }
 
-    public User build() {
-        User user = new User();
-        user.setName(this.name);
-        user.setEmail(this.email);
-        return user;
+    public Usuario build() {
+        Usuario usuario = new Usuario();
+        usuario.setNome(this.name);
+        usuario.setEmail(this.email);
+        return usuario;
     }
 
     public String getName() {

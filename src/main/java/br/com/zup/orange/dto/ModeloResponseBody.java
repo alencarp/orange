@@ -1,7 +1,5 @@
 package br.com.zup.orange.dto;
 
-import java.util.List;
-
 public class ModeloResponseBody {
     private int codigo;
     private String nome;

@@ -1,6 +1,5 @@
 package br.com.zup.orange.dto;
 
-import br.com.zup.orange.domain.User;
 import br.com.zup.orange.domain.Veiculo;
 
 import javax.validation.constraints.*;
@@ -19,7 +18,7 @@ public class VeiculoPostRequestBody {
     @Max(value = 2021, message = "Ano não pode ser posterior a 2021")
     private int ano;
 
-
+    private Long usuarioId;
 
     public VeiculoPostRequestBody(String marca, String modelo, int ano) {
         this.marca = marca;
@@ -30,11 +29,12 @@ public class VeiculoPostRequestBody {
     public VeiculoPostRequestBody() {
     }
 
-    public Veiculo build() {
+    public Veiculo build(String valor) {
         Veiculo veiculo = new Veiculo();
         veiculo.setMarca(this.marca);
         veiculo.setModelo(this.modelo);
         veiculo.setAno(this.ano);
+        veiculo.setValor(valor);
         return veiculo;
     }
 
