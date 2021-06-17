@@ -48,7 +48,7 @@ public class BuscaValorFipeService {
 //				.path("5940")
 //				.path("/anos")
                 .build();
-
+        System.out.println("URI Marca: " + uri.toUriString());
         ResponseEntity<MarcaResponseBody[]> responseEntityMarca = restTemplate.getForEntity(uri.toUriString(), MarcaResponseBody[].class);
         MarcaResponseBody[] marcasArray = responseEntityMarca.getBody();
 //        imprimirMarca(marcasArray);
@@ -87,7 +87,7 @@ public class BuscaValorFipeService {
 //				.path("5940")
 //				.path("/anos")
                 .build();
-
+        System.out.println("URI Modelos: " + uri.toUriString());
         ResponseEntity<ModelosListaResponseBody> responseEntityModelos = restTemplate.getForEntity(uri.toUriString(), ModelosListaResponseBody.class);
         ModelosListaResponseBody modelosListaResponseBody = responseEntityModelos.getBody();
 //        imprimirModelo(modelosListaResponseBody);
@@ -121,7 +121,7 @@ public class BuscaValorFipeService {
 				.path(String.valueOf(codigoModelo))
 				.path("/anos")
                 .build();
-
+        System.out.println("URI Ano: " + uri.toUriString());
         ResponseEntity<AnoResponseBody[]> responseEntityAno = restTemplate.getForEntity(uri.toUriString(), AnoResponseBody[].class);
         AnoResponseBody[] anosArray = responseEntityAno.getBody();
 //        imprimirAno(anosArray);
@@ -162,10 +162,10 @@ public class BuscaValorFipeService {
                 .path("/anos/")
                 .path(codigoAno)
                 .build();
-
+        System.out.println("URI Valor: " + uri.toUriString());
         ResponseEntity<ValorResponseBody> responseEntityValor = restTemplate.getForEntity(uri.toUriString(), ValorResponseBody.class);
         ValorResponseBody valorResponseBody = responseEntityValor.getBody();
-        imprimirValorResponseBody(valorResponseBody);
+//        imprimirValorResponseBody(valorResponseBody);
         return valorResponseBody;
     }
 

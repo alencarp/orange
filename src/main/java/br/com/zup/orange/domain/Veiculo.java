@@ -1,5 +1,7 @@
 package br.com.zup.orange.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +15,7 @@ public class Veiculo {
     private String modelo;
     private int ano;
     private String valor;
-
+    @JsonIgnore
     @JoinColumn(name = "usuario_id")
     @ManyToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
@@ -71,7 +73,23 @@ public class Veiculo {
         return usuario;
     }
 
-    public void atribuiUsuario(Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    @Override
+    public String toString() {
+        return "Veiculo{" +
+                "id=" + id +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", ano=" + ano +
+                ", valor='" + valor + '\'' +
+                ", usuario=" + usuario +
+                '}';
+    }
+
+    //    public void atribuiUsuario(Usuario usuario) {
+//        this.usuario = usuario;
+//    }
 }

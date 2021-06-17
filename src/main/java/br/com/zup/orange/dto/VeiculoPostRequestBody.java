@@ -1,7 +1,7 @@
 package br.com.zup.orange.dto;
 
 import br.com.zup.orange.domain.Veiculo;
-
+import br.com.zup.orange.domain.Usuario;
 import javax.validation.constraints.*;
 
 public class VeiculoPostRequestBody {
@@ -29,15 +29,6 @@ public class VeiculoPostRequestBody {
     public VeiculoPostRequestBody() {
     }
 
-    public Veiculo build(String valor) {
-        Veiculo veiculo = new Veiculo();
-        veiculo.setMarca(this.marca);
-        veiculo.setModelo(this.modelo);
-        veiculo.setAno(this.ano);
-        veiculo.setValor(valor);
-        return veiculo;
-    }
-
     public String getMarca() {
         return marca;
     }
@@ -60,5 +51,13 @@ public class VeiculoPostRequestBody {
 
     public void setAno(int ano) {
         this.ano = ano;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 }

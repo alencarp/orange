@@ -15,18 +15,24 @@ public class Usuario {
     private long id;
     private String nome;
     private String email;
-
-    @JsonIgnore
+//    @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private Set<Veiculo> veiculos = new HashSet<>();
 
     public Usuario() {
     }
 
-    public Usuario(long id, String nome, String email) {
+//    public Usuario(long id, String nome, String email) {
+//        this.id = id;
+//        this.nome = nome;
+//        this.email = email;
+//    }
+
+    public Usuario(long id, String nome, String email, Set<Veiculo> veiculos) {
         this.id = id;
         this.nome = nome;
         this.email = email;
+        this.veiculos = veiculos;
     }
 
     public long getId() {
@@ -57,6 +63,10 @@ public class Usuario {
         this.veiculos = veiculos;
     }
 
+    public Set<Veiculo> getVeiculos() {
+        return veiculos;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -66,4 +76,8 @@ public class Usuario {
                 ", veiculos=" + veiculos +
                 '}';
     }
+
+//    public void atribuirVeiculo(Veiculo veiculo) {
+//        this.veiculos.add(veiculo);
+//    }
 }

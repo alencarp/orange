@@ -7,14 +7,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 public class UsuarioPostRequestBody {
-    @NotBlank(message = "Name is mandatory")
+    @NotBlank(message = "Nome é obrigatório")
     private String name;
 
-    @NotBlank(message = "Email is mandatory")
-    @Email(message = "Is mandatory to be an e-mail")
+    @NotBlank(message = "E-mail é obrigatório")
+    @Email(message = "É obrigatório ser um e-mail.")
     @Column(unique = true)
     private String email;
-
 
     public UsuarioPostRequestBody() {
     }
@@ -47,8 +46,6 @@ public class UsuarioPostRequestBody {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 
     @Override
     public String toString() {

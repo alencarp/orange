@@ -26,9 +26,12 @@ public class UsuarioService {
         return usuarioRepository.save(usuarioPostRequestBody.build());
     }
 
+    public Usuario save(Usuario usuario){
+        return usuarioRepository.save(usuario);
+    }
 
     public Optional<Usuario> findById(Long usuarioId) {
 //        Usuario usuario = usuarioService.findById(usuarioId).get();
-    return usuarioRepository.findById(usuarioId);
+        return usuarioRepository.findById(usuarioId);
     }
 }
