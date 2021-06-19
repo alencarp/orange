@@ -6,18 +6,6 @@ import java.io.Serializable;
 
 public class ValorResponseBody implements Serializable {
 
-    /*
-    "Valor": "R$ 3.055,00",
-"Marca": "Ford",
-"Modelo": "Corcel II GL/GT",
-"AnoModelo": 1986,
-"Combustivel": "Gasolina",
-"CodigoFipe": "003129-1",
-"MesReferencia": "junho de 2021 ",
-"TipoVeiculo": 1,
-"SiglaCombustivel": "G"
-     */
-
     @JsonSetter("Valor")
     private String valor;
 

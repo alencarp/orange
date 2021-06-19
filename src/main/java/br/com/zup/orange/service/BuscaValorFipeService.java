@@ -43,10 +43,6 @@ public class BuscaValorFipeService {
                 .scheme("https")
                 .host("parallelum.com.br")
                 .path("fipe/api/v1/carros/marcas")
-//				.path("59")
-//				.path("/modelos/")
-//				.path("5940")
-//				.path("/anos")
                 .build();
         System.out.println("URI Marca: " + uri.toUriString());
         ResponseEntity<MarcaResponseBody[]> responseEntityMarca = restTemplate.getForEntity(uri.toUriString(), MarcaResponseBody[].class);
@@ -57,7 +53,6 @@ public class BuscaValorFipeService {
 
 
     private int buscaCodigoMarcaByNome(MarcaResponseBody[] marcasArray, String marca) throws MarcaNotFoundException {
-
         for (MarcaResponseBody m : marcasArray) {
             if (m.getNome().equalsIgnoreCase(marca)) {
                 return m.getCodigo();
@@ -65,7 +60,6 @@ public class BuscaValorFipeService {
         }
         throw new MarcaNotFoundException();
     }
-
 
     public void imprimirMarca(MarcaResponseBody[] marcasArray) {
         for (MarcaResponseBody m : marcasArray) {
@@ -75,8 +69,6 @@ public class BuscaValorFipeService {
         }
     }
 
-
-
     public ModelosListaResponseBody buscarModelo(int codigoMarca) throws ModeloNotFoundException {
         UriComponents uri = UriComponentsBuilder.newInstance()
                 .scheme("https")
@@ -84,8 +76,6 @@ public class BuscaValorFipeService {
                 .path("fipe/api/v1/carros/marcas/")
 				.path(String.valueOf(codigoMarca))
 				.path("/modelos")
-//				.path("5940")
-//				.path("/anos")
                 .build();
         System.out.println("URI Modelos: " + uri.toUriString());
         ResponseEntity<ModelosListaResponseBody> responseEntityModelos = restTemplate.getForEntity(uri.toUriString(), ModelosListaResponseBody.class);
@@ -102,7 +92,6 @@ public class BuscaValorFipeService {
         }
         throw new ModeloNotFoundException();
     }
-
 
     public void imprimirModelo(ModelosListaResponseBody modelosListaResponseBody) {
         for (ModeloResponseBody modeloResponseBody : modelosListaResponseBody.getModelos()) {

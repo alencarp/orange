@@ -1,7 +1,5 @@
 package br.com.zup.orange.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,25 +11,26 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable=false)
     private String nome;
+    @Column(nullable=false, unique = true)
     private String email;
-//    @JsonIgnore
+    @Column(nullable=false, unique = true)
+    private String cpf;
+    @Column(name="data_nasc", nullable=false)
+    private String dataNascimento;
     @OneToMany(mappedBy = "usuario")
     private Set<Veiculo> veiculos = new HashSet<>();
 
     public Usuario() {
     }
 
-//    public Usuario(long id, String nome, String email) {
-//        this.id = id;
-//        this.nome = nome;
-//        this.email = email;
-//    }
-
-    public Usuario(long id, String nome, String email, Set<Veiculo> veiculos) {
+    public Usuario(long id, String nome, String email, String cpf, String dataNascimento, Set<Veiculo> veiculos) {
         this.id = id;
         this.nome = nome;
         this.email = email;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
         this.veiculos = veiculos;
     }
 
@@ -59,12 +58,28 @@ public class Usuario {
         this.email = email;
     }
 
-    public void setVeiculos(Set<Veiculo> veiculos) {
-        this.veiculos = veiculos;
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public Set<Veiculo> getVeiculos() {
         return veiculos;
+    }
+
+    public void setVeiculos(Set<Veiculo> veiculos) {
+        this.veiculos = veiculos;
     }
 
     @Override
@@ -73,11 +88,9 @@ public class Usuario {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", dataNascimento='" + dataNascimento + '\'' +
                 ", veiculos=" + veiculos +
                 '}';
     }
-
-//    public void atribuirVeiculo(Veiculo veiculo) {
-//        this.veiculos.add(veiculo);
-//    }
 }

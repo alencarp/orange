@@ -1,11 +1,8 @@
 package br.com.zup.orange.controller;
 
-import br.com.zup.orange.domain.Usuario;
-import br.com.zup.orange.domain.Veiculo;
 import br.com.zup.orange.dto.VeiculoPostRequestBody;
 import br.com.zup.orange.exception.ModeloNotFoundException;
 import br.com.zup.orange.exception.UsuarioNotFoundException;
-import br.com.zup.orange.service.UsuarioService;
 import br.com.zup.orange.service.VeiculoService;
 import br.com.zup.orange.exception.MarcaNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -30,16 +26,12 @@ public class VeiculoController {
         this.veiculoService = veiculoService;
     }
 
-    @GetMapping
-    public List<Veiculo> list() {
-        return veiculoService.listAll(); //com ResponseEntity traz mais informações, ex.: Status
-    }
-
     @PostMapping
-    public ResponseEntity<Veiculo> save (@Valid @RequestBody VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException, ModeloNotFoundException, UsuarioNotFoundException {
-        return ResponseEntity.ok(veiculoService.save(veiculoPostRequestBody));
+    public ResponseEntity<String> save(@Valid @RequestBody VeiculoPostRequestBody veiculoPostRequestBody) throws
+            MarcaNotFoundException, ModeloNotFoundException, UsuarioNotFoundException {
+                veiculoService.save(veiculoPostRequestBody);
+                return new ResponseEntity<>("Veículo é válido.", HttpStatus.OK);
     }
-
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)

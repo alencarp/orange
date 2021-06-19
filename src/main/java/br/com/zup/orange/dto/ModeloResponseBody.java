@@ -1,6 +1,7 @@
 package br.com.zup.orange.dto;
 
 public class ModeloResponseBody {
+
     private int codigo;
     private String nome;
 

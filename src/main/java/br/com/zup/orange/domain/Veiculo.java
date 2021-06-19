@@ -11,10 +11,17 @@ public class Veiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable=false)
     private String marca;
+    @Column(nullable=false)
     private String modelo;
+    @Column(nullable=false)
     private int ano;
     private String valor;
+    @Column(name="dia_rodizio")
+    private String diaRodizio;
+    @Column(name="is_rodizio_ativo")
+    private boolean isRodizioAtivo;
     @JsonIgnore
     @JoinColumn(name = "usuario_id")
     @ManyToOne(cascade = CascadeType.ALL)
@@ -63,10 +70,28 @@ public class Veiculo {
         this.ano = ano;
     }
 
-    public void setValor(String valor) { this.valor = valor;    }
-
     public String getValor() {
         return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
+    public String getDiaRodizio() {
+        return diaRodizio;
+    }
+
+    public void setDiaRodizio(String diaRodizio) {
+        this.diaRodizio = diaRodizio;
+    }
+
+    public boolean isRodizioAtivo() {
+        return isRodizioAtivo;
+    }
+
+    public void setRodizioAtivo(boolean rodizioAtivo) {
+        isRodizioAtivo = rodizioAtivo;
     }
 
     public Usuario getUsuario() {
@@ -85,11 +110,9 @@ public class Veiculo {
                 ", modelo='" + modelo + '\'' +
                 ", ano=" + ano +
                 ", valor='" + valor + '\'' +
+                ", diaRodizio='" + diaRodizio + '\'' +
+                ", isRodizioAtivo=" + isRodizioAtivo +
                 ", usuario=" + usuario +
                 '}';
     }
-
-    //    public void atribuiUsuario(Usuario usuario) {
-//        this.usuario = usuario;
-//    }
 }

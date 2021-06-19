@@ -23,7 +23,16 @@ public class UsuarioService {
     }
 
     public Usuario save(UsuarioPostRequestBody usuarioPostRequestBody){
-        return usuarioRepository.save(usuarioPostRequestBody.build());
+        return usuarioRepository.save(build(usuarioPostRequestBody));
+    }
+
+    public Usuario build(UsuarioPostRequestBody usuarioPostRequestBody) {
+        Usuario usuario = new Usuario();
+        usuario.setNome(usuarioPostRequestBody.getName());
+        usuario.setEmail(usuarioPostRequestBody.getEmail());
+        usuario.setCpf(usuarioPostRequestBody.getCpf());
+        usuario.setDataNascimento(usuarioPostRequestBody.getDataNascimento());
+        return usuario;
     }
 
     public Usuario save(Usuario usuario){
@@ -31,7 +40,6 @@ public class UsuarioService {
     }
 
     public Optional<Usuario> findById(Long usuarioId) {
-//        Usuario usuario = usuarioService.findById(usuarioId).get();
         return usuarioRepository.findById(usuarioId);
     }
 }

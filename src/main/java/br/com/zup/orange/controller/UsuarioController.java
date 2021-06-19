@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -22,24 +21,18 @@ import java.util.Optional;
 @RequestMapping("usuarios")
 public class UsuarioController {
     private UsuarioService usuarioService;
-
-    @Autowired
     private VeiculoService veiculoService;
 
     @Autowired
-    public UsuarioController(UsuarioService usuarioService) {
+    public UsuarioController(UsuarioService usuarioService, VeiculoService veiculoService) {
         this.usuarioService = usuarioService;
-    }
-
-    @GetMapping
-    public List<Usuario> list() {
-        return (List<Usuario>) usuarioService.listAll();
+        this.veiculoService = veiculoService;
     }
 
     @PostMapping
     ResponseEntity<String> save(@Valid @RequestBody UsuarioPostRequestBody usuarioPostRequestBody) {
         usuarioService.save(usuarioPostRequestBody);
-        return ResponseEntity.ok("User is valid");
+        return new ResponseEntity<>("Usuário é válido.", HttpStatus.OK);
     }
 
     @GetMapping
@@ -62,6 +55,3 @@ public class UsuarioController {
         return errors;
     }
 }
-
-
-
