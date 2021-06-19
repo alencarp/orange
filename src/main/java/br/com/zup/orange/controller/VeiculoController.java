@@ -8,7 +8,9 @@ import br.com.zup.orange.exception.MarcaNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,18 +32,25 @@ public class VeiculoController {
     public ResponseEntity<String> save(@Valid @RequestBody VeiculoPostRequestBody veiculoPostRequestBody) throws
             MarcaNotFoundException, ModeloNotFoundException, UsuarioNotFoundException {
                 veiculoService.save(veiculoPostRequestBody);
-                return new ResponseEntity<>("Veículo é válido.", HttpStatus.OK);
+                return new ResponseEntity<>("Veículo cadastrado com sucesso.", HttpStatus.OK);
+    }
+
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(value = {UsuarioNotFoundException.class, ModeloNotFoundException.class, MarcaNotFoundException.class})
+    public String handleNotFoundExceptions(Exception ex) {
+        return ex.getMessage();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
+        for(ObjectError error : ex.getBindingResult().getAllErrors()) {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
-        });
+        }
         return errors;
     }
 }

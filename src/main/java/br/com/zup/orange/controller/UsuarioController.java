@@ -32,7 +32,7 @@ public class UsuarioController {
     @PostMapping
     ResponseEntity<String> save(@Valid @RequestBody UsuarioPostRequestBody usuarioPostRequestBody) {
         usuarioService.save(usuarioPostRequestBody);
-        return new ResponseEntity<>("Usuário é válido.", HttpStatus.OK);
+        return new ResponseEntity<>("Usuário cadastrado com sucesso.", HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -41,6 +41,12 @@ public class UsuarioController {
         Optional<Usuario> usuarioOptional =  usuarioService.findById(usuarioId);
         Usuario usuario = usuarioOptional.orElseThrow(() -> new UsuarioNotFoundException());
         return usuario;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(value = {UsuarioNotFoundException.class})
+    public String handleUsuarioNotFoundExceptions(Exception ex) {
+        return ex.getMessage();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
