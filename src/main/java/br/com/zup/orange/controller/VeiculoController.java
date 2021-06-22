@@ -8,7 +8,6 @@ import br.com.zup.orange.exception.MarcaNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -32,12 +31,12 @@ public class VeiculoController {
     public ResponseEntity<String> save(@Valid @RequestBody VeiculoPostRequestBody veiculoPostRequestBody) throws
             MarcaNotFoundException, ModeloNotFoundException, UsuarioNotFoundException {
                 veiculoService.save(veiculoPostRequestBody);
-                return new ResponseEntity<>("Veículo cadastrado com sucesso.", HttpStatus.OK);
+                return new ResponseEntity<>("Veículo cadastrado com sucesso.", HttpStatus.CREATED);
     }
 
-
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(value = {UsuarioNotFoundException.class, ModeloNotFoundException.class, MarcaNotFoundException.class})
+    @ExceptionHandler(value = {UsuarioNotFoundException.class, ModeloNotFoundException.class,
+            MarcaNotFoundException.class})
     public String handleNotFoundExceptions(Exception ex) {
         return ex.getMessage();
     }

@@ -19,11 +19,13 @@ import java.util.Optional;
 public class VeiculoService {
     private VeiculoRepository veiculoRepository;
     private UsuarioRepository usuarioRepository;
+    private BuscaValorFipeService buscaValorFipeService;
 
     @Autowired
-    public VeiculoService(VeiculoRepository veiculoRepository, UsuarioRepository usuarioRepository) {
+    public VeiculoService(VeiculoRepository veiculoRepository, UsuarioRepository usuarioRepository, BuscaValorFipeService buscaValorFipeService) {
         this.veiculoRepository = veiculoRepository;
         this.usuarioRepository = usuarioRepository;
+        this.buscaValorFipeService = buscaValorFipeService;
     }
 
     public List<Veiculo> listAll() {
@@ -32,7 +34,7 @@ public class VeiculoService {
 
     public Veiculo save(VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException,
             ModeloNotFoundException, UsuarioNotFoundException {
-        String precoVeiculo = new BuscaValorFipeService().buscaPrecoVeiculo(veiculoPostRequestBody);
+        String precoVeiculo = buscaValorFipeService.buscaPrecoVeiculo(veiculoPostRequestBody);
         Optional<Usuario> usuario = usuarioRepository.findById(veiculoPostRequestBody.getUsuarioId());
         String rodizioDiaDaSemana = buscarDiaRodizio(veiculoPostRequestBody);
         boolean isrodizioAtivo = rodizioAtivo(rodizioDiaDaSemana);
@@ -60,28 +62,17 @@ public class VeiculoService {
         String diaDaSemana;
         int diaRodizio = (Math.abs(veiculoPostRequestBody.getAno()) % 10);
         switch (diaRodizio) {
-            case 0:
-            case 1:
-                diaDaSemana = "segunda-feira";
+            case 0: case 1: diaDaSemana = "segunda-feira";
                 break;
-            case 2:
-            case 3:
-                diaDaSemana = "terça-feira";
+            case 2: case 3: diaDaSemana = "terça-feira";
                 break;
-            case 4:
-            case 5:
-                diaDaSemana = "quarta-feira";
+            case 4: case 5: diaDaSemana = "quarta-feira";
                 break;
-            case 6:
-            case 7:
-                diaDaSemana = "quinta-feira";
+            case 6: case 7: diaDaSemana = "quinta-feira";
                 break;
-            case 8:
-            case 9:
-                diaDaSemana = "sexta-feira";
+            case 8: case 9: diaDaSemana = "sexta-feira";
                 break;
-            default:
-                diaDaSemana = "Número inválido para dia de rodízio.";
+            default: diaDaSemana = "Número inválido para dia de rodízio.";
         }
         return diaDaSemana;
     }

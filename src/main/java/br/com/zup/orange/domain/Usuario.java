@@ -1,7 +1,8 @@
 package br.com.zup.orange.domain;
 
 import javax.persistence.*;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,12 +21,12 @@ public class Usuario {
     @Column(name="data_nasc", nullable=false)
     private String dataNascimento;
     @OneToMany(mappedBy = "usuario")
-    private Set<Veiculo> veiculos = new HashSet<>();
+    private List<Veiculo> veiculos = new ArrayList<>();
 
     public Usuario() {
     }
 
-    public Usuario(long id, String nome, String email, String cpf, String dataNascimento, Set<Veiculo> veiculos) {
+    public Usuario(long id, String nome, String email, String cpf, String dataNascimento, List<Veiculo> veiculos) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -74,11 +75,11 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
     }
 
-    public Set<Veiculo> getVeiculos() {
+    public List<Veiculo> getVeiculos() {
         return veiculos;
     }
 
-    public void setVeiculos(Set<Veiculo> veiculos) {
+    public void setVeiculos(List<Veiculo> veiculos) {
         this.veiculos = veiculos;
     }
 
