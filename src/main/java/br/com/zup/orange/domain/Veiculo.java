@@ -98,9 +98,10 @@ public class Veiculo {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void atribuiUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
 
     @Override
     public String toString() {
