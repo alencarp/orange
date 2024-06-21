@@ -32,7 +32,7 @@ public class VeiculoService {
         return veiculoRepository.findAll();
     }
 
-    public Veiculo save(VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException,
+    public Veiculo createAndSave(VeiculoPostRequestBody veiculoPostRequestBody) throws MarcaNotFoundException,
             ModeloNotFoundException, UsuarioNotFoundException {
         String precoVeiculo = buscaValorFipeService.buscaPrecoVeiculo(veiculoPostRequestBody);
         Optional<Usuario> usuario = usuarioRepository.findById(veiculoPostRequestBody.getUsuarioId());
@@ -45,6 +45,12 @@ public class VeiculoService {
                 veiculoPostRequestBody));
     }
 
+    public Veiculo save (Veiculo veiculo) {
+        return veiculoRepository.save(veiculo);
+    }
+
+
+
     public Veiculo build(String valor, Usuario usuario, String rodizioDiaDaSemana, boolean isRodizioAtivo,
                          VeiculoPostRequestBody veiculoPostRequestBody) {
         Veiculo veiculo = new Veiculo();
@@ -52,7 +58,7 @@ public class VeiculoService {
         veiculo.setModelo(veiculoPostRequestBody.getModelo());
         veiculo.setAno(veiculoPostRequestBody.getAno());
         veiculo.setValor(valor);
-        veiculo.setUsuario(usuario);
+        veiculo.atribuiUsuario(usuario);
         veiculo.setDiaRodizio(rodizioDiaDaSemana);
         veiculo.setRodizioAtivo(isRodizioAtivo);
         return veiculo;
